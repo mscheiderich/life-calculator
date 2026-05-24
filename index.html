@@ -979,7 +979,7 @@
       <div class="cta-text">This estimate is your starting point. As a licensed insurance professional, I can help you find the right policy at the right price — often for less than you'd expect.</div>
       <div class="cta-buttons">
         <a href="tel:+17702684418" class="cta-btn cta-btn-primary">📞 Call Us Today</a>
-        <a href="mailto:mscheiderich@allstate.com" class="cta-btn cta-btn-secondary">✉ Send My Results</a>
+        <a id="emailBtn" href="#" class="cta-btn cta-btn-secondary">✉ Get a Free Quote</a>
       </div>
     </div>
     <span class="restart-link" onclick="restart()">← Start Over</span>
@@ -1116,6 +1116,25 @@
     document.getElementById('offsetDisplay').textContent = '-' + fmt(offsets);
     document.getElementById('finalDisplay').textContent = fmt(net);
     document.getElementById('resultSub').textContent = name + "'s personalized DIME analysis";
+
+    // Build pre-filled email with calculator results
+    const emailSubject = encodeURIComponent('Life Insurance Quote Request — ' + name);
+    const emailBody = encodeURIComponent(
+      'Hi Mike,\n\n' +
+      'I just used your life insurance calculator and wanted to request a free quote.\n\n' +
+      'Here are my results:\n' +
+      '  • Recommended Death Benefit: ' + fmt(gross) + '\n' +
+      '  • My Coverage Gap: ' + fmt(net) + '\n\n' +
+      'My Contact Information:\n' +
+      '  • Name: ' + name + '\n' +
+      '  • Phone: \n' +
+      '  • Best time to reach me: \n\n' +
+      'Please feel free to reach out at your earliest convenience.\n\n' +
+      'Thank you,\n' +
+      name
+    );
+    document.getElementById('emailBtn').href =
+      'mailto:mike@gahomeinsuranceexperts.com?subject=' + emailSubject + '&body=' + emailBody;
 
     const items = [
       { label: 'Debt & Final Expenses', note: 'Debts your family would inherit', value: debt },
